@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    volumes:
+      - ../:/var/www/
+    ports:
+      - '8005:80'
+    networks:
+      - my-blog-network
+  php:
+    build:
+      context: ./php
+      dockerfile: ./Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ../:/var/www/
+    networks:
+      - my-blog-network
+  db:
+    image: mysql:8.0.23
+    command: ['--character-set-server=utf8mb4','--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    networks:
+      - my-blog-network
+
+networks:
+  my-blog-network:
