@@ -2,12 +2,11 @@
 
 namespace App\User\Domain;
 
-class User
+final class User
 {
     public function __construct
     (
-        protected readonly int $id,
-        protected readonly int $uuid,
+        protected readonly UserId $id,
         protected string $name,
         protected string $surname,
         protected string $email
@@ -15,9 +14,14 @@ class User
     {
     }
 
-    public function getUuid(): int
+    public static function create(UserId $id, string $name, string $surname, string $email): User
     {
-        return $this->uuid;
+        return new self($id,$name,$surname,$email);
+    }
+
+    public function getId(): UserId
+    {
+        return $this->id;
     }
 
     public function getName(): ?string
