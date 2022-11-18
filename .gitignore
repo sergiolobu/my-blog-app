@@ -7,6 +7,7 @@
 # Email spool folder
 /app/spool/*
 
+docker/mysql*
 # Cache, session files and logs (Symfony3)
 /var/cache/*
 /var/logs/*
@@ -57,3 +58,5 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
+
+**/.idea
