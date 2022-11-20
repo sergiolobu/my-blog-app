@@ -13,6 +13,9 @@ start:
 stop:
 	docker-compose -f docker/docker-compose.yml down
 
+kill:
+	docker-compose -f docker/docker-compose.yml kill
+
 dump-sql:
 	docker-compose -f docker/docker-compose.yml exec php bin/console doctrine:schema:update --dump-sql
 
@@ -30,6 +33,9 @@ migration-diff:
 
 composer-install:
 	docker-compose -f docker/docker-compose.yml exec php composer install
+
+composer-require:
+	docker-compose -f docker/docker-compose.yml exec php composer require
 
 init-test:
 	docker-compose exec php bin/console doctrine:database:create --env=test
