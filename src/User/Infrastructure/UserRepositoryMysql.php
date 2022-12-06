@@ -2,7 +2,7 @@
 
 namespace App\User\Infrastructure;
 
-use App\Shared\Infrastucture\Doctrine\DoctrineRepository;
+use App\Shared\Infrastructure\Doctrine\DoctrineRepository;
 use App\User\Domain\User;
 use App\User\Domain\UserRepository;
 
