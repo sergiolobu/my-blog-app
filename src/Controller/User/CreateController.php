@@ -2,9 +2,9 @@
 
 namespace App\Controller\User;
 
+use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\User\Application\Create\CreateUserCommand;
-use App\User\Application\Create\CreateUserCommandHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CreateController extends AbstractController
 {
-    public function __construct(private readonly CreateUserCommandHandler $handler)
+    public function __construct(private readonly CommandBus $commandBus)
     {
     }
 
@@ -30,7 +30,8 @@ class CreateController extends AbstractController
             $email = $data['email'];
 
             $dto = new CreateUserCommand($id, $name, $surname, $email);
-            $this->handler->__invoke($dto);
+
+            $this->commandBus->dispatch($dto);
         } catch (\Exception $exception) {
             return new JsonResponse(['status' => sprintf('Error (user not created : %s)',$exception->getMessage())], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

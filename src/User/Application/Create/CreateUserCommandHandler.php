@@ -1,9 +1,10 @@
 <?php
 
 namespace App\User\Application\Create;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\User\Domain\UserId;
 
-class CreateUserCommandHandler
+class CreateUserCommandHandler implements CommandHandler
 {
     public function __construct
     (
