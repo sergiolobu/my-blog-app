@@ -9,12 +9,12 @@ final class User
         protected readonly UserId $id,
         protected string $name,
         protected string $surname,
-        protected string $email
+        protected UserEmail $email
     )
     {
     }
 
-    public static function create(UserId $id, string $name, string $surname, string $email): User
+    public static function create(UserId $id, string $name, string $surname, UserEmail $email): User
     {
         return new self($id,$name,$surname,$email);
     }
@@ -34,7 +34,7 @@ final class User
         return $this->surname;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): UserEmail
     {
         return $this->email;
     }

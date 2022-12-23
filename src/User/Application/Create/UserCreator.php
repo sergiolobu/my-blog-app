@@ -3,6 +3,7 @@
 namespace App\User\Application\Create;
 
 use App\User\Domain\User;
+use App\User\Domain\UserEmail;
 use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 
@@ -12,7 +13,7 @@ class UserCreator
     {
     }
 
-    public function __invoke(UserId $uuid, string $name, string $surname, string $email)
+    public function __invoke(UserId $uuid, string $name, string $surname, UserEmail $email): void
     {
         $user = User::create($uuid,$name,$surname,$email);
 

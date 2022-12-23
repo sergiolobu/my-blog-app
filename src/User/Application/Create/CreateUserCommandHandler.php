@@ -2,6 +2,7 @@
 
 namespace App\User\Application\Create;
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\User\Domain\UserEmail;
 use App\User\Domain\UserId;
 
 class CreateUserCommandHandler implements CommandHandler
@@ -18,7 +19,7 @@ class CreateUserCommandHandler implements CommandHandler
         $id = new UserId($command->getId());
         $name = $command->getName();
         $surname = $command->getSurname();
-        $email = $command->getEmail();
+        $email = UserEmail::create($command->getEmail());
 
         $this->creator->__invoke($id,$name,$surname,$email);
     }
