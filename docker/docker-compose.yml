@@ -24,7 +24,7 @@ services:
       APP_ENV: dev
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
-      PHP_IDE_CONFIG: serverName=myblog-app.local
+      PHP_IDE_CONFIG: serverName=localhost
     volumes:
       - ../:/var/www/
     networks:
