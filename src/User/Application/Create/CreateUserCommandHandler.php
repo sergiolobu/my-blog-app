@@ -2,6 +2,7 @@
 
 namespace App\User\Application\Create;
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\User\Application\Notification\NotificationSender;
 use App\User\Domain\UserEmail;
 use App\User\Domain\UserId;
 
@@ -9,7 +10,8 @@ class CreateUserCommandHandler implements CommandHandler
 {
     public function __construct
     (
-        private readonly UserCreator $creator
+        private readonly UserCreator $creator,
+        private readonly NotificationSender $notifier
     )
     {
     }
@@ -22,5 +24,6 @@ class CreateUserCommandHandler implements CommandHandler
         $email = UserEmail::create($command->getEmail());
 
         $this->creator->__invoke($id,$name,$surname,$email);
+        $this->notifier->__invoke($email, sprintf('User %s, was created successfully', $email));
     }
 }

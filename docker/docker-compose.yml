@@ -44,5 +44,14 @@ services:
     networks:
       - my-blog-network
 
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    restart: always
+    ports:
+       - '8025:8025'
+       - '1025:1025'
+    networks:
+      - my-blog-network
 networks:
   my-blog-network:
