@@ -6,10 +6,10 @@ final class User
 {
     public function __construct
     (
-        protected readonly UserId $id,
+        protected readonly string $id,
         protected string $name,
         protected string $surname,
-        protected UserEmail $email
+        protected string $email
     )
     {
     }
@@ -19,7 +19,7 @@ final class User
         return new self($id,$name,$surname,$email);
     }
 
-    public function getId(): UserId
+    public function getId(): string
     {
         return $this->id;
     }
@@ -34,7 +34,7 @@ final class User
         return $this->surname;
     }
 
-    public function getEmail(): UserEmail
+    public function getEmail(): string
     {
         return $this->email;
     }

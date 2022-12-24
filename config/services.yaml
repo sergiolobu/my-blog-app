@@ -15,10 +15,16 @@ services:
         App\Shared\Domain\Bus\Command\CommandHandler:
             tags: ['app.command_handler']
 
+        App\Shared\Domain\Bus\Query\QueryHandler:
+            tags: ['app.query_handler']
     ### Buses
     App\Shared\Domain\Bus\Command\CommandBus:
         class: App\Shared\Infrastructure\Bus\Command\InMemoryCommandBus
         arguments: [ !tagged app.command_handler ]
+
+    App\Shared\Domain\Bus\Query\QueryBus:
+        class: App\Shared\Infrastructure\Bus\Query\InMemoryQueryBus
+        arguments: [ !tagged app.query_handler ]
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
