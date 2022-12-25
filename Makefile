@@ -37,13 +37,14 @@ composer-install:
 composer-require:
 	docker compose -f docker/docker-compose.yml exec php composer require
 
-init-test:
-	docker compose exec php bin/console doctrine:database:create --env=test
-	docker compose exec php bin/console doctrine:schema:update --env=test --force
-	docker compose exec php bin/console doctrine:fixtures:load --env=test
-
 run-test:
-	docker compose exec php ./vendor/bin/phpunit
+	docker compose -f docker/docker-compose.yml exec php ./vendor/bin/phpunit
 
 fix-permission:
 	sudo chmod -R 777 var/cache var/log
+
+bash-php:
+	docker compose -f docker/docker-compose.yml exec php bash
+
+clear-cache:
+	docker compose -f docker/docker-compose.yml exec php bin/console cache:clear

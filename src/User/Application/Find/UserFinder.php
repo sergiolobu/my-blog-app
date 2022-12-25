@@ -6,7 +6,7 @@ use App\User\Domain\User;
 use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 
-final class UserFinder
+class UserFinder
 {
     public function __construct(private readonly UserRepository $repository)
     {
