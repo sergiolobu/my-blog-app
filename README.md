@@ -4,29 +4,55 @@
 
 ```scala
 src
-├── Controller
+├── Controller //Entrypoint
 │   └── User
-│       └── CreateController.php  //Entrypoint to create user 
+│       ├── CreateController.php
+│       └── GetController.php
+├── DataFixtures
+│   └── AppFixtures.php
 ├── Kernel.php
 ├── Shared // Dir contains all Infrastucture and Domain Infrastucture Bounded Context
 │   ├── Domain
+│   │   ├── Bus
+│   │   │   ├── Command
+│   │   │   └── Query
+│   │   ├── Notifier
+│   │   │   └── Notifier.php
 │   │   └── ValueObject
 │   │       └── Uuid.php
-│   └── Infrastucture
-│       └── Doctrine
-│           └── DoctrineRepository.php
+│   └── Infrastructure
+│       ├── Bus
+│       │   ├── Command
+│       │   ├── HandlerBuilder.php
+│       │   └── Query
+│       ├── Doctrine
+│       │   └── DoctrineRepository.php // An implementation of the repository
+│       └── Notifier // Notifier configuration
+│           └── EmailNotifier.php
 └── User
-├── Application // Uses Cases
-│   └── Create
-│       ├── CreateUserCommandHandler.php
-│       ├── CreateUserCommand.php
-│       └── UserCreator.php
-├── Domain 
-│   ├── UserId.php
-│   ├── User.php
-│   └── UserRepository.php
-└── Infrastructure
-├── Doctrine
-│   └── User.orm.xml
-└── UserRepositoryMysql.php
+    ├── Application // Uses Cases
+    │   ├── Create
+    │   │   ├── CreateUserCommandHandler.php
+    │   │   ├── CreateUserCommand.php
+    │   │   └── UserCreator.php
+    │   ├── Find
+    │   │   ├── FindUserQueryHandler.php
+    │   │   ├── FindUserQuery.php
+    │   │   └── UserFinder.php
+    │   └── Notification
+    │       └── NotificationSender.php
+    ├── Domain
+    │   ├── UserEmail.php // ValueObject
+    │   ├── UserId.php // ValueObject
+    │   ├── User.php // Entity
+    │   ├── UserRepository.php // Interface of repository
+    │   └── UserResponse.php
+    ├── Exception // All users exceptions
+    │   ├── UserEmailNotValidException.php
+    │   └── UserNotFoundException.php
+    └── Infrastructure
+        ├── Doctrine
+        │   └── User.orm.xml
+        └── UserRepositoryMysql.php
+
 ```
